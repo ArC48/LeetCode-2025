@@ -25,7 +25,7 @@ class MyHashMap:
             self.storage[index].append((key, value))
             self.items_count += 1
             if len(self.storage) * 4 < self.items_count:
-                self.resize(len(self.storage) * 2)
+                self.resize(len(self.storage) * 4)
         else:
             for i in range(len(self.storage[index])):
                 if self.storage[index][i][0] == key:
@@ -51,7 +51,7 @@ class MyHashMap:
                     self.storage[index].pop(i)
                     self.items_count -= 1
                     if len(self.storage) // 4 > self.items_count:
-                        self.resize(len(self.storage) // 2)
+                        self.resize(len(self.storage) // 4)
                     break
     
     def _contains(self, key: int) -> bool:
