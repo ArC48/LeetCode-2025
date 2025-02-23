@@ -12,7 +12,7 @@ class MyStack:
             element = self.q1.pop(0)
             self.q2.append(element)
         elem = self.q1.pop(0)
-        self.q1 = self.q2
+        self.q1, self.q2 = self.q2, []
         return elem
 
     def top(self) -> int:
@@ -20,7 +20,7 @@ class MyStack:
         for i in range(len(self.q1)):
             last = self.q1.pop(0)
             self.q2.append(last)
-        self.q1 = self.q2
+        self.q1, self.q2 = self.q2, []
         return last
 
     def empty(self) -> bool:
