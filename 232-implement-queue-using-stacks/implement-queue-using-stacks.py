@@ -18,10 +18,10 @@ class MyQueue:
         return self.s2[-1]
 
     def empty(self) -> bool:
-        return len(self.s1) + len(self.s2) == 0
+        return not self.s1 and not self.s2
 
     def move_values(self) -> None:
-        for _ in range(len(self.s1)):
+        while self.s1:
             self.s2.append(self.s1.pop())
 
 
