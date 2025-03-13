@@ -4,8 +4,8 @@ class Solution:
         current_element = nums[0]
         while nums[current_element] > 0:
             curr_idx = current_element
+            current_element = nums[curr_idx]
             nums[curr_idx] *= -1
-            current_element = -nums[curr_idx]
 
         for i in range(len(nums)):
             if nums[i] < 0:
