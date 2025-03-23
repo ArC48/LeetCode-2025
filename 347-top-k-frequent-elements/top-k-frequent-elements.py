@@ -11,7 +11,6 @@ class Solution:
 
         for element, count in counts.items():
             buckets[count].append(element)
-        print(buckets)
         result = []
 
         for i in range(len(buckets) - 1, 0, -1):
