@@ -1,24 +1,32 @@
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-        hashmap = {}
+        counts = {}
 
         for num in nums:
-            hashmap[num] = hashmap.get(num, 0) + 1
+            counts[num] = counts.get(num, 0) + 1
 
-        bucket_sort = []
-        for i in range(len(nums) + 1): bucket_sort.append([])
+        bucket_sort = [0] * len(nums)
 
-        for key, value in hashmap.items():
-            bucket_sort[value].append(key)
+        for num in counts:
+            index = counts[num] - 1
 
-        result = []
-        for i in range(len(bucket_sort) - 1, 0, -1):
-            while bucket_sort[i] and k:
-                result.append(bucket_sort[i].pop())
+            if not bucket_sort[index]:
+                bucket_sort[index] = []
+            bucket_sort[index].append(num)
+
+        res = []
+        i = len(nums)
+        while i and k:
+            while bucket_sort[i - 1]:
+                res.append(bucket_sort[i - 1].pop())
                 k -= 1
+                if not k:
+                    break
             if not k:
                 break
-        
-        return result
+            i -= 1
 
-        
+        return res
+
+
+
