@@ -4,29 +4,18 @@ class Solution:
 
         for num in nums:
             counts[num] = counts.get(num, 0) + 1
-
+        
         bucket_sort = [0] * len(nums)
-
-        for num in counts:
-            index = counts[num] - 1
-
-            if not bucket_sort[index]:
-                bucket_sort[index] = []
-            bucket_sort[index].append(num)
-
+        for key in counts:
+            freq = counts[key]
+            if not bucket_sort[freq - 1]:
+                bucket_sort[freq - 1] = []
+            bucket_sort[freq - 1].append(key)
+        
         res = []
-        i = len(nums)
-        while i and k:
-            while bucket_sort[i - 1]:
-                res.append(bucket_sort[i - 1].pop())
-                k -= 1
-                if not k:
-                    break
-            if not k:
-                break
-            i -= 1
-
+        for i in range(len(bucket_sort) - 1, -1, -1):
+            if bucket_sort[i]:
+                while bucket_sort[i] and k:
+                    res.append(bucket_sort[i].pop())
+                    k -= 1
         return res
-
-
-
