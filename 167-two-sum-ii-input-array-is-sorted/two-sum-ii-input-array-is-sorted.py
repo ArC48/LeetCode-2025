@@ -1,14 +1,15 @@
 class Solution:
     def twoSum(self, numbers: List[int], target: int) -> List[int]:
-        for i, num in enumerate(numbers):
-            diff = target - num
-            left = i + 1
-            right = len(numbers) - 1
-            while left <= right:
-                mid = left + (right - left) // 2
-                if numbers[mid] > diff:
-                    right = mid - 1
-                elif numbers[mid] < diff:
-                    left = mid + 1
-                else:
-                    return [i + 1, mid + 1]
+
+        left = 0
+        right = len(numbers) - 1
+        while left < right:
+            summ = numbers[left] + numbers[right]
+            if summ < target:
+                left += 1
+            elif summ > target:
+                right -= 1
+            else:
+                break
+        return [left + 1, right + 1]
+
