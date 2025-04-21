@@ -1,28 +1,23 @@
 class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
-        seen = set()
-        res = set()
-        for i, num in enumerate(nums):
-            if num in seen:
-                continue
-            seen.add(num)
-            r = self.twoSum(i, nums, -num)
-            if r:
-                for elem in r:
-                    res.add(tuple(sorted(elem)))
-        return list(res)
-
-
-    def twoSum(self, startIndex, nums, target) -> List[int]:
-        seen = set()
-        used = set()
+        nums.sort()
         res = []
-        for i in range(startIndex + 1, len(nums)):
-            if nums[i] in used:
+
+        for i, num in enumerate(nums):
+            if i > 0 and num == nums[i - 1]:
                 continue
-            need = target - nums[i]
-            if need in seen:
-                res.append([-target, need, nums[i]])
-                used.add(nums[i])
-            seen.add(nums[i])
+            
+            left, right = i + 1, len(nums) - 1
+            while left < right:
+                summ = nums[left] + num + nums[right]
+                if summ == 0:
+                    res.append([nums[left], num, nums[right]])
+                    right -= 1
+                    while nums[right] == nums[right + 1] and left < right:
+                        right -= 1
+                elif summ < 0:
+                    left += 1
+                else:
+                    right -= 1
         return res
+                
