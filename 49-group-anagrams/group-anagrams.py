@@ -3,10 +3,15 @@ class Solution:
         groups = {}
 
         for word in strs:
-            key = str(sorted(word))
-            if key not in groups:
-                groups[key] = []
-            groups[key].append(word)
+            cs = [0] * 26
+
+            for char in word:
+                index = ord(char) - ord("a")
+                cs[index] += 1
+            cs = tuple(cs)
+            if cs not in groups:
+                groups[cs] = []
+            groups[cs].append(word)
         
         res = []
         for key in groups:
