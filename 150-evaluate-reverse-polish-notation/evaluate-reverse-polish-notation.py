@@ -4,7 +4,8 @@ class Solution:
 
         for elem in tokens:
             if elem in "+-*/":
-                n, m = stack[-2], stack[-1]
+                m = stack.pop()
+                n = stack.pop()
                 if elem == "+":
                     res = n + m
                 elif elem == "-":
@@ -13,8 +14,6 @@ class Solution:
                     res = n * m
                 else:
                     res = int(n / m)
-                stack.pop()
-                stack.pop()
                 stack.append(res)
             else:
                 stack.append(int(elem))
