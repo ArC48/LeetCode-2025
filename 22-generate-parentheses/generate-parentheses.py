@@ -1,9 +1,12 @@
 class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
-        res = self.helper("", n, [])
+        res = self.helper("(", n, [], 1, 0)
         return res
 
-    def helper(self, parentheses, n, res):
+    def helper(self, parentheses, n, res, opened, closed):
+        if opened < closed : 
+            return
+        
         if len(parentheses) == n * 2:
             opened = 0
             closed = 0
@@ -19,8 +22,8 @@ class Solution:
                 res.append(parentheses)
             return
 
-        left = self.helper(parentheses + "(", n, res)
-        right = self.helper(parentheses + ")", n, res)
+        self.helper(parentheses + "(", n, res, opened+1, closed)
+        self.helper(parentheses + ")", n, res, opened, closed+1)
 
         return res
         
