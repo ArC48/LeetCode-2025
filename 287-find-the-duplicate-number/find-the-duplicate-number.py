@@ -1,14 +1,11 @@
 class Solution:
     def findDuplicate(self, nums: List[int]) -> int:
-        # constant memory solution
-        current_element = nums[0]
-        while nums[current_element] > 0:
-            curr_idx = current_element
-            current_element = nums[curr_idx]
-            nums[curr_idx] *= -1
-
-        for i in range(len(nums)):
-            if nums[i] < 0:
-                nums[i] *= -1
-
-        return current_element
+        res = 0
+        for num in nums:
+            index = abs(num) - 1
+            if nums[index] < 0:
+                for i in range(len(nums)):
+                    nums[i] = abs(nums[i])
+                return index + 1
+            nums[index] = -nums[index]
+        
